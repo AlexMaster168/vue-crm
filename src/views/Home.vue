@@ -4,7 +4,7 @@
       <h3>Счет</h3>
 
       <button class="btn waves-effect waves-light btn-small">
-        <i class="material-icons">refresh</i>
+        <img class="drower-image" src="../assets/refresh.png" alt="refresh">
       </button>
     </div>
 

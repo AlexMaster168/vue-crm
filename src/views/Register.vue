@@ -1,5 +1,5 @@
 <template>
-   <form class="card auth-card" @submit.prevent="onSubmit">
+   <form class="card auth-card" @submit.prevent="onSubmit()">
       <div class="card-content">
          <span class="card-title">Домашняя бухгалтерия</span>
          <div :class="['input-field', {invalid: eError}]">
@@ -31,20 +31,25 @@
          </div>
          <p>
             <label>
-               <input type="checkbox" required />
+               <input :class="{invalid: aError}" type="checkbox" v-model.trim="agree" />
                <span>С правилами согласен</span>
             </label>
          </p>
+         <small v-if="aError">{{ aError }}</small>
       </div>
       <div class="card-action">
          <div>
             <button
+               :disabled="isSubmitting || isTooManyAttempts"
                class="btn waves-effect waves-light auth-submit"
                type="submit"
             >
                Зарегистрироваться
                <img class="drower-image" src="../assets/send.png" alt="send">
             </button>
+            <div class="text-danger" v-if="isTooManyAttempts">
+               Вы слишком часто пытаетесь войти в систему. Попробуйте позже
+            </div>
          </div>
 
          <p class="center">
@@ -56,18 +61,18 @@
 </template>
 
 <script>
-import { useLoginForm } from "@/utils/validation/login-form"
+import { useRegisterForm } from "@/utils/validation/register-form"
 
 export default {
    name: "register",
    setup() {
-         return { ...useLoginForm()}
-      }
+      return { ...useRegisterForm()}
+   },
 }
 </script>
 
 <style scoped>
- small {
-    color: red
- }
+small, .text-danger {
+   color: red
+}
 </style>

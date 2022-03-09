@@ -32,7 +32,7 @@
           </td>
           <td>
             <button class="btn-small btn">
-              <i class="material-icons">open_in_new</i>
+              <img class="drower-image" src="../assets/open.jpg" alt="open">
             </button>
           </td>
         </tr>

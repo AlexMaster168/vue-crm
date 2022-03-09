@@ -4,7 +4,7 @@ import { useRouter } from "vue-router"
 import { useStore } from "vuex"
 import { computed, watch } from "vue"
 
-export function useLoginForm() {
+export function useRegisterForm() {
    const { handleSubmit, isSubmitting, submitCount } = useForm()
    const router = useRouter()
    const store = useStore()
@@ -37,16 +37,39 @@ export function useLoginForm() {
       }
    })
 
+   const { value: name, errorMessage: nError, handleBlur: nBlur } = useField(
+      "name",
+      yup
+         .string()
+         .trim()
+         .required("Пожалуйста введите имя")
+         .min(MIN_LENGTH, `Имя не может быть меньше ${MIN_LENGTH} символов`),
+   )
+
+   const { value: agree, errorMessage: aError, handleBlur: aBlur } = useField(
+      "agree",
+      yup
+         .boolean()
+         .required("Пожалуйста поставьте галочку"),
+   )
+
    const onSubmit = handleSubmit(async () => {
       let formData = {
          email: email.value,
          password: password.value,
+         name: name.value,
       }
-      await store.dispatch("login", formData)
+      await store.dispatch("register", formData)
       await router.push("/")
    })
 
    return {
+      name,
+      nError,
+      nBlur,
+      agree,
+      aBlur,
+      aError,
       email,
       password,
       eError,
@@ -55,6 +78,6 @@ export function useLoginForm() {
       pBlur,
       onSubmit,
       isSubmitting,
-      isTooManyAttempts,
+      isTooManyAttempts
    }
 }
