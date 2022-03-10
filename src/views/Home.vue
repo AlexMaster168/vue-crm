@@ -1,58 +1,48 @@
 <template>
-  <div>
-    <div class="page-title">
-      <h3>Счет</h3>
+   <div>
+      <div class="page-title">
+         <h3>Счет</h3>
 
-      <button class="btn waves-effect waves-light btn-small">
-        <img class="drower-image" src="../assets/refresh.png" alt="refresh">
-      </button>
-    </div>
-
-    <div class="row">
-      <div class="col s12 m6 l4">
-        <div class="card light-blue bill-card">
-          <div class="card-content white-text">
-            <span class="card-title">Счет в валюте</span>
-
-            <p class="currency-line">
-              <span>12.0 UA</span>
-            </p>
-          </div>
-        </div>
+         <button class="btn waves-effect waves-light btn-small">
+            <img class="drower-image" src="../assets/refresh.png" alt="refresh">
+         </button>
       </div>
 
-      <div class="col s12 m6 l8">
-        <div class="card orange darken-3 bill-card">
-          <div class="card-content white-text">
-            <div class="card-header">
-              <span class="card-title">Курс валют</span>
-            </div>
-            <table>
-              <thead>
-              <tr>
-                <th>Валюта</th>
-                <th>Курс</th>
-                <th>Дата</th>
-              </tr>
-              </thead>
+      <Loader v-if="loading" />
 
-              <tbody>
-              <tr>
-                <td>грн</td>
-                <td>12121</td>
-                <td>12.12.12</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div v-else class="row">
+
+         <HomeCurrency
+            :rates="currency.rates"
+            :date="currency.date"
+         />
       </div>
-    </div>
-  </div>
+   </div>
 </template>
 
 <script>
+import HomeCurrency from "@/components/HomeCurrency"
+import Loader from "@/components/Loader"
+
 export default {
-  name: 'home'
+   name: "home",
+   data:() => ({
+      loading: true,
+      currency: null
+   }),
+   components: {
+      HomeCurrency, Loader
+   },
+   async mounted() {
+      this.currency = await this.$store.dispatch('fetchCurrency')
+      this.loading = false
+   },
+   methods: {
+      async refresh() {
+         this.loading = true
+         this.currency = await this.$store.dispatch('fetchCurrency')
+         this.loading = false
+      }
+   },
 }
 </script>

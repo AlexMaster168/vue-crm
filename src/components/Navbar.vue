@@ -27,7 +27,7 @@
          </li>
          <li class="divider" tabindex="-1"></li>
          <li>
-            <a href="#" class="black-text" @click.prevent="this.logout()">
+            <a href="#" class="black-text" @click.prevent="this.logoutHandler()">
                <img class="drower-image" src="../assets/exit.png" alt="Exit">Выйти
             </a>
          </li>
@@ -35,15 +35,17 @@
    </nav>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex"
+import { mapActions, mapGetters, mapMutations } from "vuex"
 
 export default {
    data: () => ({
       dropdown: false,
    }),
    methods: {
-      ...mapActions(["setIntervalSecond", "logout"]),
-      logout() {
+      ...mapActions(["setIntervalSecond"]),
+      ...mapMutations(["logout"]),
+      logoutHandler() {
+         this.logout()
          this.$router.push("/login?message=logout")
       },
    },

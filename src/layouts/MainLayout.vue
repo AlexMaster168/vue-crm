@@ -24,6 +24,6 @@ export default {
    components: { Navbar, Sidebar },
    data: () => ({
       isOpen: true,
-   }),
+   })
 }
 </script>

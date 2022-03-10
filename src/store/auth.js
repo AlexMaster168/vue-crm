@@ -18,6 +18,11 @@ export default {
       setUser(state, email) {
          state.currentUser = email
       },
+     logout(state) {
+         state.token = null
+         state.currentUser = ""
+         localStorage.removeItem(TOKEN_KEY)
+      },
    },
    actions: {
       async login({ commit }, payload) {
@@ -39,11 +44,6 @@ export default {
          } catch (e) {
             throw new Error()
          }
-      },
-      async logout(state) {
-            state.token = null
-            state.currentUser = ""
-            localStorage.removeItem(TOKEN_KEY)
       },
    },
    getters: {
