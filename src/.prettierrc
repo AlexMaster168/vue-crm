@@ -7,5 +7,5 @@
   "jsxBracketSameLine": true,
   "endOfLine": "lf",
   "parser": "flow",
-  "semi": false
+  "semi": false,
 }

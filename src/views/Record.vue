@@ -10,7 +10,6 @@
           <option
           >name cat</option>
         </select>
-        <label>Выберите категорию</label>
       </div>
 
       <p>

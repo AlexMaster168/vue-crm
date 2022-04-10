@@ -2,8 +2,7 @@ import { createStore } from "vuex"
 import dateUtil from "@/utils/date.util"
 import auth from "@/store/auth"
 import currencyUtils from "@/utils/currency.utils"
-
-const VUE_APP_FB_KEY = "49656929fa6f6834e9007f4334997cd3"
+import category from "@/store/category"
 
 export const index = createStore({
    state: {
@@ -39,11 +38,11 @@ export const index = createStore({
          }, 1000)
       },
       async fetchCurrency() {
-         const res = await fetch(`http://data.fixer.io/api/latest?access_key=${VUE_APP_FB_KEY}&symbols=USD,EUR,RUB`)
+         const res = await fetch(`http://data.fixer.io/api/latest?access_key=49656929fa6f6834e9007f4334997cd3&symbols=USD,EUR,RUB`)
          return await res.json()
       },
    },
    modules: {
-      auth,
+      auth, category
    },
 })
