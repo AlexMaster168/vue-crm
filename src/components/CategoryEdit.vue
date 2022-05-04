@@ -95,13 +95,5 @@ export default {
       this.title = title
       this.limit = limit
    },
-   mounted() {
-      alert(this.$refs.select)
-   },
-   unmounted() {
-      if (this.select && this.select.destroy) {
-         this.select.destroy()
-      }
-   },
 }
 </script>

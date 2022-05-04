@@ -3,6 +3,8 @@ import dateUtil from "@/utils/date.util"
 import auth from "@/store/auth"
 import currencyUtils from "@/utils/currency.utils"
 import category from "@/store/category"
+import info from "@/store/info"
+import record from "@/store/record"
 
 export const index = createStore({
    state: {
@@ -43,6 +45,6 @@ export const index = createStore({
       },
    },
    modules: {
-      auth, category
+      auth, category, info, record
    },
 })
