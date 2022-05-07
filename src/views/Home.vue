@@ -3,8 +3,8 @@
       <div class="page-title">
          <h3>Счет</h3>
 
-         <button class="btn waves-effect waves-light btn-small">
-            <img class="drower-image" src="../assets/refresh.png" alt="refresh">
+         <button class="btn waves-effect waves-light btn-small" @click="refresh">
+            <img src="../assets/refresh.png" alt="refresh">
          </button>
       </div>
 
@@ -16,23 +16,21 @@
             :rates="currency.rates"
             :date="currency.date"
          />
+
       </div>
    </div>
 </template>
 
 <script>
-import HomeCurrency from "@/components/HomeCurrency"
+import HomeCurrency from '@/components/HomeCurrency'
 import Loader from "@/components/Loader"
 
 export default {
-   name: "home",
-   data:() => ({
+   name: 'home',
+   data: () => ({
       loading: true,
       currency: null
    }),
-   components: {
-      HomeCurrency, Loader
-   },
    async mounted() {
       this.currency = await this.$store.dispatch('fetchCurrency')
       this.loading = false
@@ -44,5 +42,8 @@ export default {
          this.loading = false
       }
    },
+   components: {
+     HomeCurrency, Loader
+   }
 }
 </script>

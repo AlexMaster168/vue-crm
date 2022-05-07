@@ -11,6 +11,16 @@ export default {
             throw e
          }
       },
+      async fetchCategoryById({commit, dispatch}, id) {
+         try {
+            const uid = await dispatch('getUid')
+            const category = axios.get(`https://vue-crm-1a078-default-rtdb.europe-west1.firebasedatabase.app/users/${uid}/categories`)
+            return {...category, id}
+         } catch (e) {
+            commit('setError', e)
+            throw e
+         }
+      },
       async updateCategory({ commit }, { title, limit, id }) {
          try {
             await axios.put(`https://vue-crm-1a078-default-rtdb.europe-west1.firebasedatabase.app/categories/${id}.json`, { title, limit })

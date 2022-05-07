@@ -2,7 +2,7 @@
    <div>
       <div class="page-title">
          <h3>Планирование</h3>
-         <h4>{{this.filterCurrency(info.bill)}}</h4>
+         <h4>{{filterCurrency}}</h4>
       </div>
 
       <Loader v-if="loading" />
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import { useStore } from "vuex"
 import currencyUtils from "@/utils/currency.utils"
 import Loader from "@/components/Loader"
 export default {
@@ -37,8 +37,10 @@ export default {
       loading: true,
       categories: []
    }),
-   computed: {
-      ...mapGetters(['info', 'filterCurrency'])
+   setup() {
+      const store = useStore()
+      const { filterCurrency, info } = store.getters
+      return { filterCurrency, info }
    },
    components: {Loader},
    async mounted() {

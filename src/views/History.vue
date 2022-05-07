@@ -39,7 +39,7 @@ export default {
       this.records = records.map(record => {
          return {
             ...record,
-            categoryName: this.categories.find(c => c.id === record.categoryId).title,
+            categoryName: this.categories.find(c => c.id === record.categoryId),
             typeClass: record.type === 'income' ? 'green' : 'red',
             typeText: record.type === 'income' ? 'Доход' : 'Расход',
          }
